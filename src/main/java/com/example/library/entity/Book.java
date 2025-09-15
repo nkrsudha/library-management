@@ -14,6 +14,7 @@ public class Book {
     private String isbn;
     private int publishedYear;
     private boolean isAvailable;
+    private String info;
 
     public Book() {
         
@@ -63,6 +64,15 @@ public class Book {
     public void setPublishedYear(int publishedYear) {
         this.publishedYear = publishedYear;
     }
+
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
     public boolean isAvailable() {
         return isAvailable;
 
