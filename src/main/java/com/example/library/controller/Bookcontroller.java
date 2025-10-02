@@ -58,13 +58,13 @@ public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
 }
 
 //Temporary endpoint for browser testing only
-@GetMapping("/delete/{id}")
+@GetMapping("test/delete/{id}")
 public String deleteBookGet(@PathVariable Long id) {
     service.deleteBook(id);
     return "Book with ID "+ id + " deleted successfully";
 }
 //Temporary endpoint for browser testing
-@GetMapping("/update")
+@GetMapping("test/update")
 public String updateBookGet(@RequestParam Long id,@RequestParam String title, @RequestParam String author, @RequestParam(required = false) String isbn, @RequestParam(required = false) Integer publishedYear, @RequestParam(required = false) Boolean available,@RequestParam(required = false)String info) {
     Book updatedBook = new Book();
     updatedBook.setTitle(title);
