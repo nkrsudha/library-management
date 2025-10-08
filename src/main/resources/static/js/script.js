@@ -8,10 +8,10 @@ function updateBook(id) {
         available: document.getElementById('available-' + id).value === 'true'
     };
 
-    fetch('/books/' + id, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(book)
+    fetch('/update-book/' + id, {   
+        method: 'POST',             
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `title=${book.title}&author=${book.author}&isbn=${book.isbn}&publishedYear=${book.publishedYear}&info=${book.info}&available=${book.available}`
     })
     .then(response => {
         if (response.ok) {

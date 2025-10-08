@@ -26,3 +26,36 @@ th {
 tr:nth-child(even) {
     background-color:#f9f9f9;
 }
+
+/*Responsive*/
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+input, select, button {
+    width:100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    th, td {
+        padding: 6px;
+        font-size: 13px;
+    }
+}

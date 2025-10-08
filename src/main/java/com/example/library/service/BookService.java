@@ -37,7 +37,23 @@ public class BookService {
             book.setPublishedYear(bookDetails.getPublishedYear());
             return repository.save(book);
         }).orElseThrow(() -> new RuntimeException("Book not found with id "+ id));
-        }    
+        }  
+      
+        // New method to update individual fields
+    public void updateBook(Long id, String title, String author, String isbn,
+                           int publishedYear, String info, boolean available) {
+        Book book = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setIsbn(isbn);
+        book.setPublishedYear(publishedYear);
+        book.setInfo(info);
+        book.setAvailable(available);
+        repository.save(book);
+    }
+
+        
     public void deleteBook(Long id) {
         repository.deleteById(id);
     }
