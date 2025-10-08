@@ -1,96 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Library Books</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 20px;
-            }
-            h2 {
-                text-align: center;
-            }
-            table {
-                width: 90%;
-                border-collapse: collapse;
-                margin: 20px auto;
-            }
-            th, td {
-                border: 1px solid #333;
-                padding: 10px;
-                text-align: left;
-            }
-            th {
-                background-color:#f2f2f2;
-            }
-            tr:nth-child(even) {
-                background-color:#f9f9f9;
-            }
-        </style>
-    </head>
-    <body>
-        <h2>Library Books</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>ISBN</th>
-                    <th>Published Year</th>
-                    <th>Info</th>
-                    <th>Available</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="book : ${books}">
-                    <td th:text="${book.id}"></td>
-                    <td><input type="text"th:value="${book.title}" th:id="'title-'+ ${book.id}"/></td>
-                    <td><input type="text"th:value="${book.author}" th:id="'author-' + ${book.id}"/></td>
-                    <td><input type="text"th:value="${book.isbn}" th:id="'isbn-' +${book.id}"/></td>
-                    <td><input type="number" th:value="${book.publishedYear}" th:id="'year-' +${book.id}"/></td> 
-                    <td><input type="text"th:value="${book.info}" th:id="'info-' +${book.id}"/></td>
-                    <td>
-                        <select th:id=" 'available-' +${book.id}">
-                            <option th:value="true" th:selected="${book.available}">Yes</option>
-                            <option th:value="false" th:selected="${!book.available}">No</option>
-                        </select>
-                        </td>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Books</title>
 
-                    <td>
-                        <button type="button" th:onclick="'updateBook('+ ${book.id} +')'">Update</button>
-                    </td>
-                    </tr>
-            </tbody>
-        </table>
-        <script>
-            function updateBook(id) {
-                const book = {
-                    title: document.getElementById('title-' + id).value,
-                    author: document.getElementById('author-' + id).value,
-                    isbn: document.getElementById('isbn-' +id).value,
-                    publishedYear: parseInt(document.getElementById('year-' +id).value),
-                    info: document.getElementById('info-' +id).value,
-                    available: document.getElementById('available-' +id).value == 'true'
-                    };
+    <!-- Link external CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <h2>Library Books</h2>
 
-                    fetch('/books/' + id, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json'},
-                        body: JSON.stringify(book)
-                    })
-                    .then(response => {
-                        if(response.ok) {
-                            alert('Book updated successfully!');
-                        } else {
-                            alert('Failed to update book.');
-                        }
-                    })
-                    .catch(error => {
-                        alert('Error: ' + error);
-                    });
-            }
-        </script>
-        </body>
-        </html>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Published Year</th>
+                <th>Info</th>
+                <th>Available</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id}"></td>
+                <td><input type="text" th:value="${book.title}" th:id="'title-' + ${book.id}" /></td>
+                <td><input type="text" th:value="${book.author}" th:id="'author-' + ${book.id}" /></td>
+                <td><input type="text" th:value="${book.isbn}" th:id="'isbn-' + ${book.id}" /></td>
+                <td><input type="number" th:value="${book.publishedYear}" th:id="'year-' + ${book.id}" /></td> 
+                <td><input type="text" th:value="${book.info}" th:id="'info-' + ${book.id}" /></td>
+                <td>
+                    <select th:id="'available-' + ${book.id}">
+                        <option th:value="true" th:selected="${book.available}">Yes</option>
+                        <option th:value="false" th:selected="${!book.available}">No</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="button" th:onclick="'updateBook(' + ${book.id} + ')'">Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Link external JS -->
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>
